@@ -1,0 +1,65 @@
+/* ==========================================================================
+   AutismeID, tema (editorial hangat)
+   Semua pasangan teks/latar dihitung >= 4.5:1 (WCAG AA).
+   ========================================================================== */
+
+:root {
+  /* Merek */
+  --color-primary: #0f5c5a;
+  --color-primary-deep: #0b3f3e;
+  --color-accent: #a84a28;
+
+  /* Latar dan permukaan */
+  --color-bg: #fbf8f3;
+  --color-surface: #ffffff;
+  --color-tint: #f3e8dc;
+
+  /* Teks */
+  --color-text: #1f2a28;
+  --color-text-2: #3a4543;
+  --color-text-3: #5b6764;
+  --color-on-deep-muted: #d9e8e4;
+
+  /* Garis */
+  --color-border: #e3d9cc;
+  --color-border-soft: #e6ded3;
+  --color-border-dashed: #b9ae9e;
+  --color-border-input: #8a9390; /* 3.15:1, memenuhi batas UI 3:1 */
+  --color-footer-line: #2f6664;
+
+  /* Status */
+  --status-ok-bg: #e3f0ea;
+  --status-ok-text: #0f5c5a;
+  --status-warn-bg: #f8e8c8;
+  --status-warn-text: #6b4a00;
+  --status-danger-bg: #f6ddd2;
+  --status-danger-text: #7a2e12;
+  --status-neutral-bg: #e9e5dd;
+  --status-neutral-text: #3a4543;
+  --status-emergency-bg: #fbeae3;
+  --status-emergency-border: #7a2e12;
+  --status-notice-bg: #fff8ea;
+  --status-notice-border: #e8c98a;
+
+  /* Pita level risiko */
+  --risk-low: #cfe5da;
+  --risk-mid: #f1dda8;
+  --risk-high: #efc6b4;
+
+  /* Skala teks pilihan pengguna */
+  --text-scale: 1;
+}
+
+/* Mode tenang: latar lebih dingin, aksen disamakan dengan teal */
+:root[data-calm='true'] {
+  --color-bg: #f2f5f1;
+  --color-tint: #e4ece7;
+  --color-accent: #0f5c5a;
+}
+
+:root[data-text-size='m'] {
+  --text-scale: 1.125;
+}
+:root[data-text-size='l'] {
+  --text-scale: 1.25;
+}

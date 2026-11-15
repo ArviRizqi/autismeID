@@ -1,0 +1,78 @@
+@import './theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: calc(100% * var(--text-scale));
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg font-body text-body text-ink antialiased;
+    margin: 0;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+  }
+  a {
+    color: var(--color-primary);
+  }
+  a:hover {
+    color: var(--color-primary-deep);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  /* Fokus di atas latar gelap */
+  .on-dark :focus-visible {
+    outline-color: #ffffff;
+  }
+  main:focus {
+    outline: none;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+}
+
+@layer components {
+  .field {
+    @apply min-h-field rounded-md border-2 border-line-input bg-surface px-3.5 text-body text-ink;
+    font-family: inherit;
+  }
+  .placeholder-chip {
+    @apply inline-block rounded-sm border border-dashed border-line-dashed bg-tint px-2 py-0.5 text-small text-ink-3;
+  }
+}
+
+/* Mode tenang: tanpa gerak */
+:root[data-calm='true'] *,
+:root[data-calm='true'] *::before,
+:root[data-calm='true'] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
