@@ -148,7 +148,7 @@ export default function AIDemo() {
 
       {isMockApi && (
         <p className="mb-6 rounded-md border-2 border-dashed border-line-dashed p-4 text-caption text-ink-3" role="note">
-          Mode contoh: layanan model-ai belum terhubung (<code>VITE_API_URL</code> kosong). Skor di bawah disimulasikan
+          Mode pengembangan: <code>BACKEND_URL</code> di <code>.env</code> kosong, sehingga layanan model-ai tidak terhubung. Skor di bawah disimulasikan
           di browser dan bukan keluaran model.
         </p>
       )}

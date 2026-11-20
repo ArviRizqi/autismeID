@@ -71,6 +71,7 @@ export default function Admin() {
     const data = new FormData(form)
     const file = data.get('file')
     if (!(file instanceof File) || !file.name) return setNote({ ok: false, text: 'Pilih berkas dulu.' })
+    if (file.size > 4_000_000) return setNote({ ok: false, text: 'Lewat situs, berkas maksimal sekitar 4 MB. Untuk PDF lebih besar, kompres dulu atau unggah langsung ke layanan dengan curl (lihat README).' })
     for (const [k, v] of Array.from(data.entries())) if (typeof v === 'string' && !v.trim()) data.delete(k)
     data.set('replace', data.get('replace') ? 'true' : 'false')
     await act(() => adminApi.upload(token.trim(), data))
@@ -129,7 +130,7 @@ export default function Admin() {
           <Card>
             <h2 id="h-up" className="mb-3 text-h4">Tambah dokumen</h2>
             <form onSubmit={upload} className="flex flex-col gap-3">
-              <label className="text-small font-semibold" htmlFor="f-file">Berkas (PDF, DOCX, TXT, MD, HTML)</label>
+              <label className="text-small font-semibold" htmlFor="f-file">Berkas (PDF, DOCX, TXT, MD, HTML; maks. 4 MB)</label>
               <input id="f-file" name="file" type="file" accept=".pdf,.docx,.txt,.md,.html,.htm" className="field" />
               <label className="text-small font-semibold" htmlFor="f-title">Judul (opsional)</label>
               <input id="f-title" name="title" className="field" />

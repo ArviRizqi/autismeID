@@ -1,3 +1,7 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "functions": { "api/gateway.ts": { "maxDuration": 60 } },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/gateway?path=:path*" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
 }

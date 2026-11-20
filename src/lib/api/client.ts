@@ -14,12 +14,17 @@ import type {
   RetrievalMatch,
   SourceKind,
 } from '../../types/api'
+import { prepareUpload } from './image'
 import { mockChat, mockClassify } from './mock'
 
-const API_URL = (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, '')
+/**
+ * Browser selalu memanggil /api/* di domain situs sendiri. Alamat layanan sebenarnya ada di server (proxy Vercel atau
+ * proxy server dev), bukan di bundel ini. Lihat api/gateway.ts dan vite.config.ts.
+ */
+const API_URL = ''
 
-/** true bila VITE_API_URL kosong: jawaban disimulasikan di browser. */
-export const isMockApi = API_URL === ''
+/** true hanya saat `npm run dev` tanpa BACKEND_URL: jawaban disimulasikan di browser. */
+export const isMockApi: boolean = __MOCK_API__
 
 export type ApiErrorKind = 'network' | 'timeout' | 'http' | 'bad_response'
 
@@ -172,7 +177,7 @@ export function adaptChat(r: ChatWire): ChatResponse {
 export async function classifyImage(file: File, tta: boolean): Promise<ClassifyResponse> {
   if (isMockApi) return mockClassify(file, tta)
   const body = new FormData()
-  body.append('image', file)
+  body.append('image', await prepareUpload(file))
   body.append('use_tta', String(tta))
   return adaptPredict(await request<PredictWire>('/api/predict', { method: 'POST', body }))
 }

@@ -37,10 +37,10 @@ export function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="mb-3 text-caption font-bold uppercase tracking-[0.08em] text-accent">{children}</p>
 }
 
-/** Penanda teks yang belum diisi (dipakai di model card). */
+/** Nilai yang belum tersedia ditulis jujur sebagai "belum dipublikasikan" (dipakai di model card). */
 export function Val({ children }: { children?: ReactNode }) {
   if (children === undefined || children === null || children === '') {
-    return <span className="placeholder-chip">[belum diisi]</span>
+    return <span className="placeholder-chip">Belum dipublikasikan</span>
   }
   return <>{children}</>
 }

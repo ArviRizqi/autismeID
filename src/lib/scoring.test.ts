@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { SCORE_THRESHOLDS, levelFromScore, screeningLevel, toPercent } from './scoring'
+import { MCHAT_ITEM_COUNT, SCORE_THRESHOLDS, isRiskAnswer, levelFromScore, mchatLevel, mchatScore, toPercent, type Answer } from './scoring'
 
 describe('levelFromScore', () => {
   it('memetakan skor ke level di sekitar batas', () => {
@@ -20,10 +20,34 @@ describe('toPercent', () => {
   })
 })
 
-describe('screeningLevel (aturan contoh)', () => {
-  it('0 jawaban berisiko = rendah, 1-2 = sedang, 3+ = tinggi', () => {
-    expect(screeningLevel(0)).toBe('rendah')
-    expect(screeningLevel(2)).toBe('sedang')
-    expect(screeningLevel(3)).toBe('tinggi')
+describe('M-CHAT-R/F: butir berisiko', () => {
+  it('butir 2, 5, 12: "Ya" berisiko; lainnya: "Tidak" berisiko', () => {
+    for (const n of [2, 5, 12]) {
+      expect(isRiskAnswer(n, 'ya')).toBe(true)
+      expect(isRiskAnswer(n, 'tidak')).toBe(false)
+    }
+    for (const n of [1, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20]) {
+      expect(isRiskAnswer(n, 'tidak')).toBe(true)
+      expect(isRiskAnswer(n, 'ya')).toBe(false)
+    }
+  })
+  it('jawaban tanpa risiko di semua butir = skor 0', () => {
+    const safe: Answer[] = Array.from({ length: MCHAT_ITEM_COUNT }, (_, i) => ([2, 5, 12].includes(i + 1) ? 'tidak' : 'ya'))
+    expect(mchatScore(safe)).toBe(0)
+  })
+  it('semua jawaban berisiko = skor 20', () => {
+    const risky: Answer[] = Array.from({ length: MCHAT_ITEM_COUNT }, (_, i) => ([2, 5, 12].includes(i + 1) ? 'ya' : 'tidak'))
+    expect(mchatScore(risky)).toBe(20)
+  })
+  it('jawab "Tidak" di semua butir = 17', () => {
+    expect(mchatScore(Array<Answer>(20).fill('tidak'))).toBe(17)
+  })
+})
+
+describe('M-CHAT-R/F: tingkat risiko resmi', () => {
+  it('0-2 rendah, 3-7 sedang, 8-20 tinggi', () => {
+    expect([0, 2].map(mchatLevel)).toEqual(['rendah', 'rendah'])
+    expect([3, 7].map(mchatLevel)).toEqual(['sedang', 'sedang'])
+    expect([8, 20].map(mchatLevel)).toEqual(['tinggi', 'tinggi'])
   })
 })

@@ -11,13 +11,13 @@ export const stats = [
   },
   {
     value: 'Di atas 4 tahun',
-    text: 'usia ketika banyak anak baru dikenali, karena akses ke skrining dan terapi masih terbatas dan stigma masih kuat.',
+    text: 'usia ketika, menurut IDAI, banyak anak baru dikenali sebagai autistik, karena akses ke skrining dan terapi masih terbatas dan stigma masih kuat. Skrining sejak 16 bulan membuka peluang dukungan yang lebih awal.',
     source: 'IDAI, dikutip Investortrust',
   },
   {
-    value: '88,9% · 94,6%',
-    text: 'sensitivitas dan spesifisitas M-CHAT-R/F versi Indonesia dalam studi di RS Sanglah, Bali, bila dipakai dua tahap.',
-    source: 'Studi validasi M-CHAT-R/F di RS Sanglah, Bali',
+    value: '82,35% · 89,68%',
+    text: 'sensitivitas dan spesifisitas M-CHAT versi Indonesia (versi awal, bukan M-CHAT-R/F) pada anak usia 18 sampai 48 bulan di RS Sanglah, Bali. Artinya skrining bisa terlewat atau keliru, jadi hasilnya selalu perlu dikonfirmasi tenaga kesehatan.',
+    source: 'Paediatrica Indonesiana, studi diagnostik di RS Sanglah, Denpasar',
   },
 ]
 

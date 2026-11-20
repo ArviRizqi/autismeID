@@ -1,9 +1,4 @@
 /// <reference types="vite/client" />
 
-interface ImportMetaEnv {
-  readonly VITE_API_URL?: string
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv
-}
+/** Diisi saat build oleh vite.config.ts: true hanya pada `npm run dev` tanpa BACKEND_URL. */
+declare const __MOCK_API__: boolean

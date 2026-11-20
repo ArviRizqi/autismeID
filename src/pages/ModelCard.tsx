@@ -79,7 +79,7 @@ export default function ModelCard() {
       <h1 className="mb-4 text-h1 text-primary">Model card: klasifikasi wajah AutismeID</h1>
       <p className="mb-7 max-w-[47.5rem] text-lead text-ink-2">
         Dokumen ini menjelaskan apa yang dilakukan model, dengan data apa ia dilatih, seberapa baik ia diuji, dan di mana
-        ia bisa salah. Bagian yang masih bertanda <span className="placeholder-chip">[belum diisi]</span> sedang disusun.
+        ia bisa salah. Bagian yang bertanda <span className="placeholder-chip">Belum dipublikasikan</span> berarti informasinya belum kami terbitkan. Kami tidak mengisinya dengan perkiraan.
       </p>
 
       <Card tone="tint" className="mb-8 !p-7">

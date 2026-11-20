@@ -40,7 +40,7 @@ export function Button({ variant = 'primary', size = 'md', to, href, className, 
   }
   if (href) {
     return (
-      <a href={href} className={cls}>
+      <a href={href} className={cls} {...(/^https?:/i.test(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
         {children}
       </a>
     )

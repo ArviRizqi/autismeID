@@ -48,7 +48,7 @@ export default function Chat() {
 
       {isMockApi && (
         <p className="mb-6 rounded-md border-2 border-dashed border-line-dashed p-4 text-caption text-ink-3" role="note">
-          Mode contoh: layanan model-ai belum terhubung (<code>VITE_API_URL</code> kosong). Jawaban di bawah disimulasikan
+          Mode pengembangan: <code>BACKEND_URL</code> di <code>.env</code> kosong, sehingga layanan model-ai tidak terhubung. Jawaban di bawah disimulasikan
           di browser dan bukan keluaran model. Coba: pertanyaan tentang M-CHAT-R/F, foto wajah, "apakah anak saya autis",
           atau "anak saya kejang".
         </p>

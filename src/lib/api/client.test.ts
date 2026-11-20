@@ -6,7 +6,6 @@ function jsonRes(status: number, body: unknown) {
 
 async function load() {
   vi.resetModules()
-  vi.stubEnv('VITE_API_URL', 'https://api.test')
   return import('./client')
 }
 
@@ -54,7 +53,7 @@ describe('sendChat polling', () => {
     const p = sendChat({ message: 'q', history: [] })
     await vi.advanceTimersByTimeAsync(20_000)
     expect((await p).answer).toBe('jadi')
-    expect(f.mock.calls[1][0]).toBe('https://api.test/api/chat/jobs/abc')
+    expect(f.mock.calls[1][0]).toBe('/api/chat/jobs/abc')
   })
 
   it('state error memakai pesan server', async () => {

@@ -2,7 +2,7 @@ import type { ChatResponse, ClassifyResponse } from '../../types/api'
 import { levelFromScore } from '../scoring'
 
 /**
- * MODE CONTOH. Dipakai hanya bila VITE_API_URL kosong.
+ * MODE CONTOH. Dipakai hanya pada `npm run dev` bila BACKEND_URL kosong; tidak pernah aktif di produksi.
  * Isi di sini adalah simulasi untuk pengembangan antarmuka, BUKAN keluaran model.
  * Guardrail sungguhan (darurat, di luar cakupan, abstain) harus berjalan di API.
  * Metadata sumber di sini adalah contoh. Jangan dipakai sebagai kutipan.

@@ -1,5 +1,5 @@
 /**
- * Isi model card. Nilai `undefined` tampil sebagai "[belum diisi]".
+ * Isi model card. Nilai `undefined` tampil sebagai "Belum dipublikasikan". Isi hanya dengan fakta yang bisa diperiksa.
  *
  * Sumber kebenaran ada di repo model-ai (docs/model-card.md dan ml/reports/).
  * Salin angkanya ke sini, atau otomatiskan lewat GitHub Action saat build.
@@ -8,8 +8,8 @@
 type Maybe<T> = T | undefined
 
 export const modelCard = {
-  version: undefined as Maybe<string>,
-  updatedAt: undefined as Maybe<string>,
+  version: 'mobilevitv2_100_fusion_v1' as Maybe<string>,
+  updatedAt: '19 November 2026' as Maybe<string>,
 
   data: {
     dataset: undefined as Maybe<string>,
@@ -23,9 +23,12 @@ export const modelCard = {
 
   pipeline: {
     detector: 'MTCNN' as Maybe<string>,
-    classifier: undefined as Maybe<string>,
-    tta: undefined as Maybe<string>,
-    runtime: undefined as Maybe<string>,
+    classifier:
+      'MobileViTV2-100 (pustaka timm) dengan penggabungan fitur dari tiga tingkat jaringan, dua kelas keluaran (autistik dan non-autistik). Bobot diunduh dari Hugging Face Hub.' as Maybe<string>,
+    tta:
+      'Opsional, aktif secara bawaan. Empat tampilan gambar dirata-rata berbobot: asli (bobot 1,5), cermin horizontal, perbesaran lalu pangkas, dan rotasi acak sampai 10 derajat. Karena rotasinya acak, skor bisa berbeda tipis antar pemanggilan.' as Maybe<string>,
+    runtime:
+      'Layanan Flask di Hugging Face Space (Docker). Wajah dipangkas MTCNN lalu diperkecil ke 224 × 224 piksel sebelum masuk model.' as Maybe<string>,
   },
 
   metrics: [
@@ -36,7 +39,8 @@ export const modelCard = {
     { label: 'Galat kalibrasi (ECE)', value: undefined, ci: undefined },
   ],
 
-  thresholdMethod: undefined as Maybe<string>,
+  thresholdMethod:
+    'batas 40% dan 70% adalah nilai sementara yang ditetapkan manual dan belum diturunkan dari kurva ROC pada data validasi' as Maybe<string>,
 
   subgroups: [
     { name: 'Usia', n: undefined as Maybe<string>, auc: undefined as Maybe<string>, sens: undefined as Maybe<string>, spec: undefined as Maybe<string> },
@@ -47,15 +51,21 @@ export const modelCard = {
   ],
 
   privacy: {
-    stored: undefined as Maybe<string>,
-    processedWhere: undefined as Maybe<string>,
-    protection: undefined as Maybe<string>,
-    access: undefined as Maybe<string>,
-    deletion: undefined as Maybe<string>,
-    legalBasis: undefined as Maybe<string>,
+    stored:
+      'Tidak. Foto diproses di memori dan dibuang setelah hasil dikirim. Log server hanya mencatat ukuran gambar dan apakah wajah terdeteksi, bukan isinya.' as Maybe<string>,
+    processedWhere:
+      'Di layanan model (Hugging Face Space). Permintaan melewati server situs ini (Vercel) sebagai perantara; aplikasi tidak menyimpan isi foto di sana.' as Maybe<string>,
+    protection:
+      'Koneksi terenkripsi (HTTPS). Layanan model hanya menerima permintaan dari server situs ini, dan ukuran unggahan dibatasi.' as Maybe<string>,
+    access: 'Tidak ada salinan foto yang bisa diakses, karena foto tidak disimpan.' as Maybe<string>,
+    deletion: 'Tidak ada data foto yang tersimpan untuk dihapus.' as Maybe<string>,
+    legalBasis:
+      'Persetujuan orang tua atau wali yang dicentang sebelum foto diunggah (mengacu pada UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi).' as Maybe<string>,
   },
 
-  versions: [] as Array<{ version: string; date: string; change: string }>,
+  versions: [
+    { version: 'mobilevitv2_100_fusion_v1', date: '2026-11', change: 'Versi yang saat ini dipakai di demo /ai.' },
+  ] as Array<{ version: string; date: string; change: string }>,
   reportEmail: undefined as Maybe<string>,
 }
 

@@ -1,9 +1,9 @@
 /**
  * Klien endpoint admin. Token (ADMIN_TOKEN di server) hanya disimpan di memori halaman dan dikirim lewat header
- * Authorization. JANGAN menaruh token ini di variabel VITE_ (akan masuk ke bundel publik).
+ * Authorization. JANGAN menaruh token ini di variabel VITE_ atau di kode (akan masuk ke bundel publik).
  */
 
-const API_URL = (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, '')
+const API_URL = '' // lewat proxy /api/* di domain situs (lihat api/gateway.ts)
 
 export class AdminError extends Error {
   status?: number
@@ -50,7 +50,6 @@ export interface AdminQa {
 }
 
 async function call<T>(token: string, path: string, init: RequestInit = {}): Promise<T> {
-  if (!API_URL) throw new AdminError('VITE_API_URL belum diatur: halaman admin butuh layanan yang terhubung.')
   let res: Response
   try {
     res = await fetch(`${API_URL}${path}`, {
